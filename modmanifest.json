@@ -1,0 +1,7 @@
+{
+  "UniqueModName": "NBK_RedSpy_QM_ExtraDeployChecks",
+  "Assemblies": [
+    "QM_ExtraDeployChecks.dll"
+  ],
+  "Dependencies": []
+}
