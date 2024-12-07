@@ -18,7 +18,7 @@ When deploying, the confirmation window will be shown if any of the optional che
 
 # Configuration
 
-The configuration file will be created on the first game run and can be found at `%AppData%\..\LocalLow\Magnum Scriptum Ltd\Quasimorph\QM_ExtraDeployChecks\config.json`.
+The configuration file will be created on the first game run and can be found at `%AppData%\..\LocalLow\Magnum Scriptum Ltd\Quasimorph_ModConfigs\QM_ExtraDeployChecks\config.json`.
 
 
 # Rough Edges
@@ -39,3 +39,7 @@ Thanks!
 
 # Source Code
 Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeployChecks
+
+
+## 1.1.0
+* Moved config file directory.
