@@ -20,11 +20,10 @@ namespace QM_ExtraDeployChecks
 
             //WARNING - this is a copy of the StartOperationButtonOnClick function, shown below
             ////Original Game Code
-            //private void StartOperationButtonOnClick(CommonButton obj)
+            //if (!_isStartingOperation && !SharedUi.ConfirmDialogWindow.IsViewActive)
             //{
-            //    if (!_isStartingOperation && !SharedUi.ConfirmDialogWindow.IsViewActive)
-            //    {
-            //        if (_mercenary.Inventory.Empty && _showMode != 0)
+            //    if (_mercenary.Inventory.Empty && _showMode != 0)
+            //        if (_mercenary.CreatureData.Inventory.Empty && _showMode != 0)
             //        {
             //            SharedUi.ConfirmDialogWindow.Show(ConfirmStartMissionDialog, "ui.dialog.no_items_raidstart");
             //        }
@@ -32,7 +31,6 @@ namespace QM_ExtraDeployChecks
             //        {
             //            StartCoroutine(StartOperation());
             //        }
-            //    }
             //}
 
 
@@ -40,12 +38,12 @@ namespace QM_ExtraDeployChecks
             {
                 StringBuilder message = new StringBuilder();
 
-                Inventory inventory = __instance._mercenary.Inventory;
+                Inventory inventory = __instance._mercenary.CreatureData.Inventory;
 
                 if (__instance._showMode != 0)
                 {
 
-                    if (Plugin.Config.CheckEmptyInventory && __instance._mercenary.Inventory.Empty)
+                    if (Plugin.Config.CheckEmptyInventory && __instance._mercenary.CreatureData.Inventory.Empty)
                     {
                         message.AppendLine(Localization.Get("ui.dialog.no_items_raidstart"));
                     }

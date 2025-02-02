@@ -40,6 +40,8 @@ Thanks!
 # Source Code
 Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeployChecks
 
+## 1.2.0
+* v0.8.5 compatible.
 
 ## 1.1.0
 * Moved config file directory.
