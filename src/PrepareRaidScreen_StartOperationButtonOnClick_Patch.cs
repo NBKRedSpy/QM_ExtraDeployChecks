@@ -18,88 +18,67 @@ namespace QM_ExtraDeployChecks
         public static bool Prefix(PrepareRaidScreen __instance, CommonButton obj)
         {
 
-            //WARNING - this is a copy of the StartOperationButtonOnClick function, shown below
-            ////Original Game Code
-            //if (!_isStartingOperation && !SharedUi.ConfirmDialogWindow.IsViewActive)
-            //{
-            //    if (_mercenary.Inventory.Empty && _showMode != 0)
-            //        if (_mercenary.CreatureData.Inventory.Empty && _showMode != 0)
-            //        {
-            //            SharedUi.ConfirmDialogWindow.Show(ConfirmStartMissionDialog, "ui.dialog.no_items_raidstart");
-            //        }
-            //        else
-            //        {
-            //            StartCoroutine(StartOperation());
-            //        }
-            //}
-
-
-            if (!__instance._isStartingOperation && !SharedUi.ConfirmDialogWindow.IsViewActive)
+            if (__instance._mercenary.CreatureData.Inventory.Empty && __instance._showMode != 0)
             {
-                StringBuilder message = new StringBuilder();
-
-                Inventory inventory = __instance._mercenary.CreatureData.Inventory;
-
-                if (__instance._showMode != 0)
-                {
-
-                    if (Plugin.Config.CheckEmptyInventory && __instance._mercenary.CreatureData.Inventory.Empty)
-                    {
-                        message.AppendLine(Localization.Get("ui.dialog.no_items_raidstart"));
-                    }
-
-                    if (Plugin.Config.CheckEmptyBackpack && !CheckEmptyBackpack(inventory))
-                    {
-                        message.AppendLine("Backpack is empty");
-                    }
-
-                    if (Plugin.Config.CheckExtraReloads)
-                    {
-                        var missingAmmoReloads = MissingAmmoReloads(inventory);
-
-                        if (missingAmmoReloads.Count != 0)
-                        {
-                            message.AppendLine($"No reloads for: {String.Join(",", missingAmmoReloads)}");
-                        }
-                    }
-
-
-                    if (Plugin.Config.CheckPartiallyLoadedWeapons)
-                    {
-                        var partiallyLoaded = PartiallyLoadedWeapons(inventory);
-
-                        if (partiallyLoaded.Count != 0)
-                        {
-                            message.AppendLine($"Weapons not fully loaded: {String.Join(",", partiallyLoaded)}");
-                        }
-
-                    }
-
-                    if (Plugin.Config.CheckArmorSlotNotFilled && IsMissingArmor(inventory))
-                    {
-                        message.AppendLine($"One or more armor slots are empty");
-                    }
-
-                }
-
-                if (Plugin.Config.DebugDialog)
-                {
-                    message.AppendLine("Debug");
-                }
-
-                if (message.Length != 0)
-                {
-                    SharedUi.ConfirmDialogWindow.Show(__instance.ConfirmStartMissionDialog, message.ToString());
-                }
-                else
-                {
-                    __instance.StartCoroutine(__instance.StartOperation());
-                }
-
-                return false;
+                return true;
             }
 
-            return true;
+            if(__instance._showMode == ShowMode.Station)
+            {
+                return true;
+            }
+
+            StringBuilder message = new StringBuilder();
+
+            Inventory inventory = __instance._mercenary.CreatureData.Inventory;
+
+            //TODO:  I think the game's check already does this.  Leaving for now.
+            if (Plugin.Config.CheckEmptyInventory && __instance._mercenary.CreatureData.Inventory.Empty)
+            {
+                message.AppendLine(Localization.Get("ui.dialog.no_items_raidstart"));
+            }
+
+            if (Plugin.Config.CheckEmptyBackpack && !CheckEmptyBackpack(inventory))
+            {
+                message.AppendLine("Backpack is empty");
+            }
+
+            if (Plugin.Config.CheckExtraReloads)
+            {
+                var missingAmmoReloads = MissingAmmoReloads(inventory);
+
+                if (missingAmmoReloads.Count != 0)
+                {
+                    message.AppendLine($"No reloads for: {String.Join(",", missingAmmoReloads)}");
+                }
+            }
+
+            if (Plugin.Config.CheckPartiallyLoadedWeapons)
+            {
+                var partiallyLoaded = PartiallyLoadedWeapons(inventory);
+
+                if (partiallyLoaded.Count != 0)
+                {
+                    message.AppendLine($"Weapons not fully loaded: {String.Join(",", partiallyLoaded)}");
+                }
+            }
+
+            if (Plugin.Config.CheckArmorSlotNotFilled && IsMissingArmor(inventory))
+            {
+                message.AppendLine($"One or more armor slots are empty");
+            }
+
+            if (message.Length == 0)
+            {
+                return true;
+            }
+
+            UI.Chain<ConfirmDialogWindow>().Invoke(delegate (ConfirmDialogWindow v)
+            {
+                v.Configure(__instance.ConfirmStartMissionDialog, message.ToString());
+            }).Show();
+
+            return false;
         }
 
         private static bool IsMissingArmor(Inventory inventory)
