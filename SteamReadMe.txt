@@ -75,17 +75,17 @@ The configuration file will be created on the first game run and can be found at
 
 [h1]Rough Edges[/h1]
 
-[h2]Identifers Instead of Names[/h2]
-
-Note that this version doesn't show the name of items that are shown in the game, but the game's id's for the items.
-
-For example, Assault Rifle is called [i]pmc_assault[/i] and its ammo type is [i]Heavy[/i].
-While inconvenient, the text will at least point the user in a general direction.
-
 [h2]UI Overdraw[/h2]
 
-The confirmation dialog does not currently expand to the text size.
+The game's confirmation dialog does expand to the text size.
 The warnings are still readable, just not pretty.
+
+[h2]Ammo Type[/h2]
+
+There is not a translation for the generic ammo category.  Ex: all of the 9mm types of ammo.  It does have a translation for the "specific type of ammo".  Ex: "9mm bursting" or just "9mm".
+
+The mod uses the "currently loaded" name.  If the weapon is empty, it uses the game's default, which is usually
+the most common ammo type.  Ex: 9mm.
 
 [h1]Support[/h1]
 
@@ -95,3 +95,10 @@ Thanks!
 [h1]Source Code[/h1]
 
 Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeployChecks
+
+[h1]Change Log[/h1]
+
+[h2]1.4.0[/h2]
+[list]
+[*]The names of items are now localized.  See note about missing ammo above.
+[/list]

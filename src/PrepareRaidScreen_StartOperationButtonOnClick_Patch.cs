@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEngine.Playables;
 using static MGSC.PrepareRaidScreen;
@@ -49,7 +50,7 @@ namespace QM_ExtraDeployChecks
 
                 if (missingAmmoReloads.Count != 0)
                 {
-                    message.AppendLine($"No reloads for: {String.Join(",", missingAmmoReloads)}");
+                    message.AppendLine($"No reloads for: {LocalizeList(missingAmmoReloads)}");
                 }
             }
 
@@ -59,7 +60,7 @@ namespace QM_ExtraDeployChecks
 
                 if (partiallyLoaded.Count != 0)
                 {
-                    message.AppendLine($"Weapons not fully loaded: {String.Join(",", partiallyLoaded)}");
+                    message.AppendLine($"Weapons not fully loaded: {LocalizeList(partiallyLoaded)}");
                 }
             }
 
@@ -81,6 +82,11 @@ namespace QM_ExtraDeployChecks
             return false;
         }
 
+        private static string LocalizeList(List<string> list)
+        {
+            return String.Join(",", list.Select(x => Localization.Get($"item.{x}.name")));
+                
+        }
         private static bool IsMissingArmor(Inventory inventory)
         {
             return
@@ -105,6 +111,20 @@ namespace QM_ExtraDeployChecks
         private static List<string> MissingAmmoReloads(Inventory inventory)
         {
 
+            //----Notes about localization vs ammo type.
+            //
+            //  There isn't an entry in localization for the overall type.  
+            //for example, .42 bullets are the "Medium" AmmoType.
+            //there is not a generic pattern for all AmmoTypes, so item.*_basic_ammo.name won't work.
+            //For example, shotgun vs 9mm.
+            //
+            //  What we can do is find the ammo type.  If there is a weapon that uses that ammo type that 
+            //doesn't have reloads of any type, then pick the first weapon that uses it and use the 
+            //Current ammo type.
+            //
+            //This should be a decent balance so that the user isn't interrupted
+            //If they have dragon rounds loaded and regular ammo for reloads.
+
             List<BasePickupItem> weapons = GetAmmoWeapons(inventory);
 
             //Distinct ammo types needed for guns.
@@ -113,7 +133,7 @@ namespace QM_ExtraDeployChecks
                 .Where(x => x != null)
                 .ToHashSet();
 
-            //Get the ammo types in invenotry
+            //Get the ammo types in inventory
             var availableAmmoTypes = inventory.AllContainers
                 .SelectMany(x => x.Items)
                 .Select(x => x.Record<AmmoRecord>()?.AmmoType)
@@ -121,9 +141,21 @@ namespace QM_ExtraDeployChecks
 
             var missingAmmo = requiredAmmoTypes
                 .Where(x => !availableAmmoTypes.Contains(x))
+                .ToHashSet();
+
+            //See note at start of code.
+
+            //  Get the "currently loaded" ammo, which acts as the default named ammo type.
+            //the actual AmmoType doesn't have a localized name.  For example, 9mm is actually
+            //small_basic_ammo, while the AmmoType is Small.
+            var missingAmmoByCurrentlyLoaded = missingAmmo
+                .Join(weapons, a => a, w => w.Comp<WeaponComponent>().RequiredAmmoType,
+                    (a, w) => new { MissingAmmo = a, Weapon = w })
+                .GroupBy(x => x.MissingAmmo)        //No DistinctBy and I'm being lazy. =)
+                .Select(x => x.First().Weapon.Comp<WeaponComponent>().CurrentAmmoType.Id)
                 .ToList();
 
-            return missingAmmo;
+            return missingAmmoByCurrentlyLoaded;
         }
 
         /// <summary>
