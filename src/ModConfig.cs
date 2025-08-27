@@ -1,6 +1,7 @@
 ﻿using MGSC;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using QM_ExtraDeployChecks.Mcm;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +13,7 @@ using UnityEngine;
 
 namespace QM_ExtraDeployChecks
 {
-    public class ModConfig
+    public class ModConfig : ISave
     {
         public bool CheckEmptyInventory { get; set; } = true;
         public bool CheckEmptyBackpack { get; set; } = true;
@@ -20,44 +21,47 @@ namespace QM_ExtraDeployChecks
         public bool CheckPartiallyLoadedWeapons { get; set; } = true;
         public bool CheckArmorSlotNotFilled { get; set; } = true;
 
+        [JsonIgnore]
+        private static JsonSerializerSettings SerializerSettings { get; } = new JsonSerializerSettings()
+        {
+            Formatting = Formatting.Indented,
+        };
+
+
+        [JsonIgnore]
+        private static string ConfigPath { get; } = Plugin.ConfigPath;
+
         /// <summary>
         /// If true, will always cause the confirmation dialog to be shown, even if there are no errors.
         /// </summary>
         public bool DebugDialog { get; set; } = false;
 
-
-        public static ModConfig LoadConfig(string configPath)
+        public static ModConfig LoadConfig()
         {
             ModConfig config;
 
-            JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
-            {
-                Formatting = Formatting.Indented,
-            };
 
-
-            if (File.Exists(configPath))
+            if (File.Exists(ConfigPath))
             {
                 try
                 {
-                    string sourceJson = File.ReadAllText(configPath);
+                    string sourceJson = File.ReadAllText(ConfigPath);
 
-                    config = JsonConvert.DeserializeObject<ModConfig>(sourceJson, serializerSettings);
+                    config = JsonConvert.DeserializeObject<ModConfig>(sourceJson, SerializerSettings);
 
                     //Add any new elements that have been added since the last mod version the user had.
-                    string upgradeConfig = JsonConvert.SerializeObject(config, serializerSettings);
+                    string upgradeConfig = JsonConvert.SerializeObject(config, SerializerSettings);
 
                     if (upgradeConfig != sourceJson)
                     {
-                        Debug.Log("Updating config with missing elements");
+                        Plugin.Logger.Log("Updating config with missing elements");
                         //re-write
-                        File.WriteAllText(configPath, upgradeConfig);
+                        File.WriteAllText(ConfigPath, upgradeConfig);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Debug.LogError("Error parsing configuration.  Ignoring config file and using defaults");
-                    Debug.LogException(ex);
+                    Plugin.Logger.LogError(ex,"Error parsing configuration.  Ignoring config file and using defaults");
 
                     //Not overwriting in case the user just made a typo.
                     config = new ModConfig();
@@ -65,14 +69,29 @@ namespace QM_ExtraDeployChecks
             }
             else
             {
-                config = new ModConfig();
-
-                string json = JsonConvert.SerializeObject(config, serializerSettings);
-                File.WriteAllText(configPath, json);
-
+                //Use the defaults.
+                config = Save(new ModConfig());
             }
 
             return config;
+        }
+
+
+        public ModConfig Save() 
+        {
+            return Save(this);
+        }
+
+        private static ModConfig Save(ModConfig config)
+        {
+            string json = JsonConvert.SerializeObject(config, SerializerSettings);
+            File.WriteAllText(ConfigPath, json);
+            return config;
+        }
+
+        void ISave.Save()
+        {
+            Save(this);
         }
     }
 }

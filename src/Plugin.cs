@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using MGSC;
+using QM_ExtraDeployChecks.Mcm;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,6 +15,8 @@ namespace QM_ExtraDeployChecks
 {
     public static class Plugin
     {
+        public static Logger Logger { get;} = new Logger();
+
         public static string ModAssemblyName { get; private set; }
 
         /// <summary>
@@ -37,6 +40,8 @@ namespace QM_ExtraDeployChecks
 
         internal static FileSystemWatcher ConfigChangeWatcher { get; set; }
 
+        private static McmConfiguration McmConfiguration { get; set; }
+
         static Plugin()
         {
             ModAssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
@@ -53,7 +58,10 @@ namespace QM_ExtraDeployChecks
             UpgradeModDirectory();
             Directory.CreateDirectory(ModsPersistenceFolder);
 
-            Config = ModConfig.LoadConfig(ConfigPath);
+            Config = ModConfig.LoadConfig();
+
+            McmConfiguration = new McmConfiguration(Config);
+            McmConfiguration.TryConfigure();
 
             UnityThread.initUnityThread();
             InitConfigWatcher();
@@ -83,7 +91,7 @@ namespace QM_ExtraDeployChecks
             ConfigChangeWatcher.EnableRaisingEvents = true;
 
             //Debug
-            Debug.Log("Watcher inited");
+            //Plugin.Logger.Log("Watcher inited");
         }
 
         /// <summary>
@@ -98,12 +106,12 @@ namespace QM_ExtraDeployChecks
 
                 if (!Directory.Exists(oldDirectory)) return;
 
-                Debug.LogWarning($"Moving config folder from '{oldDirectory}' to '{ModsPersistenceFolder}");
+                Plugin.Logger.LogWarning($"Moving config folder from '{oldDirectory}' to '{ModsPersistenceFolder}");
                 Directory.Move(oldDirectory, ModsPersistenceFolder);
             }
             catch (Exception ex)
             {
-                Debug.Log($"Unable to move the config files.  Exception: {ex.ToString()}");
+                Plugin.Logger.Log($"Unable to move the config files.  Exception: {ex.ToString()}");
             }
         }
 
@@ -112,7 +120,7 @@ namespace QM_ExtraDeployChecks
         {
             UnityThread.executeInUpdate(() =>
             {
-                Debug.Log($"Config watcher error: {e.ToString()}");
+                Plugin.Logger.Log($"Config watcher error: {e.ToString()}");
             });
         }
 
@@ -126,14 +134,14 @@ namespace QM_ExtraDeployChecks
 
                     UnityThread.executeInUpdate(() =>
                     {
-                        Debug.Log($"Reloading changed config {ConfigPath}");
-                        Config = ModConfig.LoadConfig(ConfigPath);
+                        Plugin.Logger.Log($"Reloading changed config {ConfigPath}");
+                        Config = ModConfig.LoadConfig();
                     });
 
                 }
                 catch (Exception ex)
                 {
-                    Debug.Log($"Config reload error: {ex}");
+                    Plugin.Logger.Log($"Config reload error: {ex}");
                 }            
                 finally
                 {

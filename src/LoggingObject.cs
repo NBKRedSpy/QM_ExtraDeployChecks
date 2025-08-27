@@ -23,7 +23,7 @@ namespace QM_ExtraDeployChecks
 
             while(Messages.TryDequeue(out string message))
             {
-                Debug.Log(message);
+                Plugin.Logger.Log(message);
             }
         }
     }

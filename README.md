@@ -8,6 +8,13 @@ This mod includes optional loadout checks to the deployment window.
 
 When deploying, the confirmation window will be shown if any of the optional checks below fail.
 
+
+# Configuration
+
+This mod supports MCM.  The config can be changed in the Mods menu or directly in the config file.
+
+The configuration file will be created on the first game run and can be found at `%AppData%\..\LocalLow\Magnum Scriptum Ltd\Quasimorph_ModConfigs\QM_ExtraDeployChecks\config.json`.
+
 |Name|Description|Config Key| Default|
 |--|--|--|--|
 |Empty Inventory|The game's default check.  Checks if the merc's inventory is completely empty.|CheckEmptyInventory|true|
@@ -16,9 +23,6 @@ When deploying, the confirmation window will be shown if any of the optional che
 |Partially Loaded Weapons|Checks if a weapon is not fully loaded.  Ex:  12 out of 24 rounds|CheckPartiallyLoadedWeapons|true|
 |Armor Slot Empty|Checks if any armor slot is not filled.  Head, body, legs, feet|CheckArmorSlotNotFilled|true|
 
-# Configuration
-
-The configuration file will be created on the first game run and can be found at `%AppData%\..\LocalLow\Magnum Scriptum Ltd\Quasimorph_ModConfigs\QM_ExtraDeployChecks\config.json`.
 
 # Rough Edges
 ## UI Overdraw
@@ -38,8 +42,13 @@ Thanks!
 # Source Code
 Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeployChecks
 
+# Credits
+* Special thanks to Crynano for his excellent Mod Configuration Menu. 
+
 # Change Log
 
+## 1.5.0 
+* Added MCM.
 ## 1.4.0
 * The names of items are now localized.  See note about missing ammo above.
 

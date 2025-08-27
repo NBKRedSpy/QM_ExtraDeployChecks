@@ -6,6 +6,12 @@ Just deployed on a mission to find that the merc wasn't reloaded from the previo
 This mod includes optional loadout checks to the deployment window.
 
 When deploying, the confirmation window will be shown if any of the optional checks below fail.
+
+[h1]Configuration[/h1]
+
+This mod supports MCM.  The config can be changed in the Mods menu or directly in the config file.
+
+The configuration file will be created on the first game run and can be found at [i]%AppData%\..\LocalLow\Magnum Scriptum Ltd\Quasimorph_ModConfigs\QM_ExtraDeployChecks\config.json[/i].
 [table]
 [tr]
 [td]Name
@@ -69,10 +75,6 @@ When deploying, the confirmation window will be shown if any of the optional che
 [/tr]
 [/table]
 
-[h1]Configuration[/h1]
-
-The configuration file will be created on the first game run and can be found at [i]%AppData%\..\LocalLow\Magnum Scriptum Ltd\Quasimorph_ModConfigs\QM_ExtraDeployChecks\config.json[/i].
-
 [h1]Rough Edges[/h1]
 
 [h2]UI Overdraw[/h2]
@@ -96,7 +98,17 @@ Thanks!
 
 Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeployChecks
 
+[h1]Credits[/h1]
+[list]
+[*]Special thanks to Crynano for his excellent Mod Configuration Menu.
+[/list]
+
 [h1]Change Log[/h1]
+
+[h2]1.5.0[/h2]
+[list]
+[*]Added MCM.
+[/list]
 
 [h2]1.4.0[/h2]
 [list]
