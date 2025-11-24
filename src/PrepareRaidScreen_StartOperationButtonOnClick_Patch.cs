@@ -105,7 +105,7 @@ namespace QM_ExtraDeployChecks
 
         private static bool IsMissingWeapon(Inventory inventory)
         {
-            return inventory.WeaponSlots.Any(x => x.Empty);
+            return inventory.WeaponSlots.Any(x => x.Empty && x.EmptySlotsCount != 0);
         }
 
 
