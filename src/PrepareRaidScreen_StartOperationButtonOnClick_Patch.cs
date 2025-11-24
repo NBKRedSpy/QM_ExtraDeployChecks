@@ -69,10 +69,17 @@ namespace QM_ExtraDeployChecks
                 message.AppendLine($"One or more armor slots are empty");
             }
 
+            if (Plugin.Config.CheckWeaponSlotNotFilled && IsMissingWeapon(inventory))
+            {
+                message.AppendLine($"One or more weapon slots are empty");
+            }
+
             if (message.Length == 0)
             {
                 return true;
             }
+
+            message.AppendLine("Continue anyway?");
 
             UI.Chain<ConfirmDialogWindow>().Invoke(delegate (ConfirmDialogWindow v)
             {
@@ -95,6 +102,12 @@ namespace QM_ExtraDeployChecks
                 inventory.BootsSlot.Empty ||
                 inventory.LeggingsSlot.Empty;
         }
+
+        private static bool IsMissingWeapon(Inventory inventory)
+        {
+            return inventory.WeaponSlots.Any(x => x.Empty);
+        }
+
 
         private static bool CheckEmptyBackpack(Inventory inventory)
         {

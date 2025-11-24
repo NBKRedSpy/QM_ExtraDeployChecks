@@ -73,6 +73,16 @@ The configuration file will be created on the first game run and can be found at
 [td]true
 [/td]
 [/tr]
+[tr]
+[td]Weapon Slot Empty
+[/td]
+[td]Checks if any weapon slot is not filled.  Head, body, legs, feet
+[/td]
+[td]CheckWeaponSlotNotFilled
+[/td]
+[td]true
+[/td]
+[/tr]
 [/table]
 
 [h1]Rough Edges[/h1]
@@ -81,13 +91,6 @@ The configuration file will be created on the first game run and can be found at
 
 The game's confirmation dialog does expand to the text size.
 The warnings are still readable, just not pretty.
-
-[h2]Ammo Type[/h2]
-
-There is not a translation for the generic ammo category.  Ex: all of the 9mm types of ammo.  It does have a translation for the "specific type of ammo".  Ex: "9mm bursting" or just "9mm".
-
-The mod uses the "currently loaded" name.  If the weapon is empty, it uses the game's default, which is usually
-the most common ammo type.  Ex: 9mm.
 
 [h1]Support[/h1]
 
@@ -104,6 +107,11 @@ Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeplo
 [/list]
 
 [h1]Change Log[/h1]
+
+[h2]1.5.1[/h2]
+[list]
+[*]Added check for empty weapon slot.
+[/list]
 
 [h2]1.5.0[/h2]
 [list]
