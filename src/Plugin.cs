@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using MGSC;
 using QM_ExtraDeployChecks.Mcm;
+using QM_ExtraDeployChecks_Bootstrap;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,7 +14,7 @@ using UnityEngine;
 
 namespace QM_ExtraDeployChecks
 {
-    public static class Plugin
+    public class Plugin : BootstrapMod
     {
         public static Logger Logger { get;} = new Logger();
 
@@ -50,8 +51,11 @@ namespace QM_ExtraDeployChecks
             ConfigPath = Path.Combine(ModsPersistenceFolder, "config.json");
         }
 
+        public Plugin(HookEvents hookEvents, bool isBeta) : base(hookEvents, isBeta)
+        {
+            HookEvents.AfterConfigsLoaded += AfterConfig;
+        }
 
-        [Hook(ModHookType.AfterConfigsLoaded)]
         public static void AfterConfig(IModContext context)
         {
             Directory.CreateDirectory(AllModsConfigFolder);
