@@ -1,0 +1,10 @@
+{
+  "UniqueModName": "NBKRedSpy_QM_ExtraDeployChecks",
+  "Assemblies": [
+    "QM_ExtraDeployChecks_Bootstrap.dll"
+  ],
+  "Dependencies": [], 
+  "SteamTags": [
+    "Quality of Life"
+  ]
+}
