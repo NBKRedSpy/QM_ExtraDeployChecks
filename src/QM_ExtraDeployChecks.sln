@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.10.35122.118
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11312.151 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QM_ExtraDeployChecks", "QM_ExtraDeployChecks.csproj", "{D2D52E2E-95B4-44F5-9C8D-056DDD434E85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QM_ExtraDeployChecks_Bootstrap", "..\..\bootstrap\src\QM_ExtraDeployChecks_Bootstrap.csproj", "{BE851925-00DE-DB71-E421-B7276EF0EB8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D2D52E2E-95B4-44F5-9C8D-056DDD434E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2D52E2E-95B4-44F5-9C8D-056DDD434E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2D52E2E-95B4-44F5-9C8D-056DDD434E85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE851925-00DE-DB71-E421-B7276EF0EB8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE851925-00DE-DB71-E421-B7276EF0EB8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE851925-00DE-DB71-E421-B7276EF0EB8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE851925-00DE-DB71-E421-B7276EF0EB8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
