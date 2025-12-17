@@ -41,6 +41,9 @@ Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeplo
 
 # Change Log
 
+## 1.5.3 
+* 0.9.8.2 compatibility. 
+
 ## 1.5.2
 * Fix for incorrect empty weapon slot check.
 
