@@ -57,10 +57,10 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<ExcludeAssets>runtime;</ExcludeAssets>
 		</PackageReference>
-		<PackageReference Include="Lib.harmony" Version="2.3.3"  ExcludeAssets="runtime" />
-		<PackageReference Include="Microsoft.CSharp" Version="4.7.0"  ExcludeAssets="runtime" />
-		<PackageReference Include="Newtonsoft.json" Version="13.0.3"  ExcludeAssets="runtime" />
-		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0"  ExcludeAssets="runtime" />
+		<PackageReference Include="Lib.harmony" Version="2.3.3" ExcludeAssets="runtime" />
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" ExcludeAssets="runtime" />
+		<PackageReference Include="Newtonsoft.json" Version="13.0.3" ExcludeAssets="runtime" />
+		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" ExcludeAssets="runtime" />
 	</ItemGroup>
 	<PropertyGroup>
 	    <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
