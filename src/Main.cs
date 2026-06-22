@@ -1,5 +1,6 @@
 ﻿using MGSC;
 using Newtonsoft.Json;
+using ProduceAsReady_Bootstrap;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,26 +32,8 @@ namespace QM_ExtraDeployChecks_Bootstrap
 
                 BetaConfig config = JsonConvert.DeserializeObject<BetaConfig>(File.ReadAllText(Path.Combine(modPath, "version-info.json")));
 
-                bool isBeta = GetNumericVersion(Application.version) >= GetNumericVersion(config.BetaVersion);
-
-                if (isBeta)
-                {
-                    Log.LogWarning("Beta version detected.");
-                    if (config.DisableBeta)
-                    {
-                        Log.LogError("Beta version is disabled.  Mod is disabled.");
-                        return;
-                    }
-                }
-                else
-                {
-                    if (config.DisableStable)
-                    {
-                        Log.LogError("Stable version is disabled.  Mod is disabled.");
-                        return;
-                    }
-                }
-
+                bool isBeta;
+                if (VersionCheck.DisableModCheck(modPath, out isBeta)) return;
 
                 string modDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                 Assembly modAssembly = Assembly.LoadFile(Path.Combine(modDir, isBeta ? "beta" : "stable", "QM_ExtraDeployChecks.dll"));
