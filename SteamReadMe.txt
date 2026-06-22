@@ -112,6 +112,9 @@ Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeplo
 [list]
 [*]Fix: Vest slots were not checked.
 [*]Fix: Weapon based arm augments would give an empty weapon slot warning.
+[list]
+[*]Thanks to Steam user KitKat for reporting this!
+[/list]
 [*]Updated version detection for new "UNSTABLE BETA" format.
 [*]Updated to support latest update.
 [/list]
