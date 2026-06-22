@@ -3,8 +3,14 @@
     <TargetFramework>net48</TargetFramework>
 	<LangVersion>latest</LangVersion>
     <OutputType>Library</OutputType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
   </PropertyGroup>
+	<PropertyGroup>
+		<AssemblyTitle>QM_ExtraDeployChecks</AssemblyTitle>
+		<Product>QM_ExtraDeployChecks</Product>
+		<Copyright>Copyright © 2026 NBKRedSpy</Copyright>
+		<AssemblyVersion>1.5.4</AssemblyVersion>
+	</PropertyGroup>
 	<PropertyGroup>
 		<GAME_NAME>Quasimorph</GAME_NAME>
 		<SteamId>3303667923</SteamId>
@@ -96,5 +102,8 @@
 	  <Reference Update="System">
 	    <Private>False</Private>
 	  </Reference>
+	</ItemGroup>	
+	<ItemGroup>
+	  <Folder Include="Properties\" />
 	</ItemGroup>
 </Project>
