@@ -108,6 +108,11 @@ Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeplo
 
 [h1]Change Log[/h1]
 
+[h2]1.5.5[/h2]
+[list]
+[*]Beta to 1.0 promotion
+[/list]
+
 [h2]1.5.4[/h2]
 [list]
 [*]Fix: Vest slots were not checked.

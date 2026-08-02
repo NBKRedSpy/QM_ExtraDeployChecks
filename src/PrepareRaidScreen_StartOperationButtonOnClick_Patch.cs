@@ -74,6 +74,12 @@ namespace QM_ExtraDeployChecks
                 message.AppendLine($"One or more weapon slots are empty");
             }
 
+            //Pause if debugging is enabled.
+            if (Plugin.Config.DebugDialog)
+            {
+                message.AppendLine("Debug mode enabled.");
+            }
+
             if (message.Length == 0)
             {
                 return true;
@@ -100,12 +106,15 @@ namespace QM_ExtraDeployChecks
                 inventory.HelmetSlot.Empty ||
                 inventory.ArmorSlot.Empty ||
                 inventory.BootsSlot.Empty ||
-                inventory.LeggingsSlot.Empty;
+                inventory.LeggingsSlot.Empty ||
+                inventory.VestSlot.Empty;
+
         }
 
         private static bool IsMissingWeapon(Inventory inventory)
         {
-            return inventory.WeaponSlots.Any(x => x.Empty && x.EmptySlotsCount != 0);
+            return inventory.WeaponSlots.Any(x => x.EmptySlotsCount != 0 && !x.IsBlocked);
+
         }
 
 
