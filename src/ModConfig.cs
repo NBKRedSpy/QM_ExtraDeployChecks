@@ -21,6 +21,7 @@ namespace QM_ExtraDeployChecks
         public bool CheckPartiallyLoadedWeapons { get; set; } = true;
         public bool CheckArmorSlotNotFilled { get; set; } = true;
         public bool CheckWeaponSlotNotFilled { get; set; } = true;
+        public bool CheckIfFoodInInventory { get; set; } = true;
 
         [JsonIgnore]
         private static JsonSerializerSettings SerializerSettings { get; } = new JsonSerializerSettings()

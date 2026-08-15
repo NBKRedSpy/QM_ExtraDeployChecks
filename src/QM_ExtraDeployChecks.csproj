@@ -84,7 +84,7 @@
 		<ItemGroup>
 			<FilesToDelete Include="$(VersionWorkshopPath)/*" />
 			<Delete Files="@(FilesToDelete)" />
-			<BuildSource Include="$(TargetDir)/*.*" Exclude="$(TargetDir)/*bootstrap.*" />
+			<!-- <BuildSource Include="$(TargetDir)/*.*" Exclude="$(TargetDir)/*bootstrap.*" /> -->
 			<!-- Exclude workaround for build ignorning private assets for Project References-->
 		</ItemGroup>
 		<Message Importance="high" Text="ProjectDir folder -&gt; $(ProjectDir)" />
@@ -96,7 +96,7 @@
 	</Target>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\bootstrap\src\QM_ExtraDeployChecks_Bootstrap.csproj" />
+	  <!-- <ProjectReference Include="..\..\bootstrap\src\QM_ExtraDeployChecks_Bootstrap.csproj" /> -->
 	</ItemGroup>	
 	<ItemGroup>
 	  <Reference Update="System">

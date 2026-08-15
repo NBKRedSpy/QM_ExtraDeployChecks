@@ -74,6 +74,11 @@ namespace QM_ExtraDeployChecks
                 message.AppendLine($"One or more weapon slots are empty");
             }
 
+            if (Plugin.Config.CheckIfFoodInInventory && !CheckIfFoodInInventory(inventory))
+            {
+                message.AppendLine($"No food in inventory");
+            }
+
             //Pause if debugging is enabled.
             if (Plugin.Config.DebugDialog)
             {
@@ -117,6 +122,11 @@ namespace QM_ExtraDeployChecks
 
         }
 
+        private static bool CheckIfFoodInInventory(Inventory inventory)
+        {
+            return inventory.BackpackStore.Items.Any(x => x.Is<ConsumableRecord>() && x.Record<ConsumableRecord>().StarvationValue > 0)
+            || inventory.VestStore.Items.Any(x => x.Is<ConsumableRecord>() && x.Record<ConsumableRecord>().StarvationValue > 0);
+        }
 
         private static bool CheckEmptyBackpack(Inventory inventory)
         {

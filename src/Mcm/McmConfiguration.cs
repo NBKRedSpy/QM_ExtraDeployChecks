@@ -41,6 +41,8 @@ namespace QM_ExtraDeployChecks.Mcm
                     "Checks if one or more armor slots are empty"),
                 CreateConfigProperty(nameof(ModConfig.CheckWeaponSlotNotFilled), 
                     "Checks if one or more weapon slots are empty"),
+                CreateConfigProperty(nameof(ModConfig.CheckIfFoodInInventory), 
+                    "Checks if there are any food items in the inventory"),
                 CreateConfigProperty(nameof(ModConfig.DebugDialog),
                     "For debugging.  Always shows the 'continue' message box even with no check failures."),
 

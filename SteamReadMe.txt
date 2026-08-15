@@ -83,6 +83,16 @@ The configuration file will be created on the first game run and can be found at
 [td]true
 [/td]
 [/tr]
+[tr]
+[td]Food in inventory
+[/td]
+[td]Checks if there is food in the inventory
+[/td]
+[td]CheckIfFoodInInventory
+[/td]
+[td]true
+[/td]
+[/tr]
 [/table]
 
 [h1]Rough Edges[/h1]
