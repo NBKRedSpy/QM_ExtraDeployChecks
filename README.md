@@ -8,7 +8,6 @@ This mod includes optional loadout checks to the deployment window.
 
 When deploying, the confirmation window will be shown if any of the optional checks below fail.
 
-
 # Configuration
 
 This mod supports MCM.  The config can be changed in the Mods menu or directly in the config file.
@@ -40,8 +39,13 @@ Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeplo
 # Credits
 * Special thanks to Crynano for his excellent Mod Configuration Menu. 
 
+
 # Change Log
 
+## 1.6.0
+* Adds check for food.  
+    * Thank you to SamuelDev for adding this feature
+    
 ## 1.5.5
 * Beta to 1.0 promotion
 
