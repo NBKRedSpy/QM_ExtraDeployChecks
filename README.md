@@ -44,7 +44,7 @@ Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeplo
 
 ## 1.6.0
 * Adds check for food.  
-    * Thank you to SamuelDev for adding this feature
+    * Thank you to Devined for adding this feature
     
 ## 1.5.5
 * Beta to 1.0 promotion

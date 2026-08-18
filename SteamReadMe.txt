@@ -122,7 +122,7 @@ Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeplo
 [list]
 [*]Adds check for food.
 [list]
-[*]Thank you to SamuelDev for adding this feature
+[*]Thank you to Devined for adding this feature
 [/list]
 [/list]
 
