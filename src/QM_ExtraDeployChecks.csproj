@@ -9,7 +9,7 @@
 		<AssemblyTitle>QM_ExtraDeployChecks</AssemblyTitle>
 		<Product>QM_ExtraDeployChecks</Product>
 		<Copyright>Copyright © 2026 NBKRedSpy</Copyright>
-		<AssemblyVersion>1.5.5</AssemblyVersion>
+		<AssemblyVersion>1.6.0</AssemblyVersion>
 	</PropertyGroup>
 	<PropertyGroup>
 		<GAME_NAME>Quasimorph</GAME_NAME>

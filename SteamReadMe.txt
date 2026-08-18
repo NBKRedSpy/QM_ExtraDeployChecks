@@ -84,11 +84,11 @@ The configuration file will be created on the first game run and can be found at
 [/td]
 [/tr]
 [tr]
-[td]Food in inventory
+[td]Food in Inventory
 [/td]
 [td]Checks if there is food in the inventory
 [/td]
-[td]CheckIfFoodInInventory
+[td]CheckFoodInInventory
 [/td]
 [td]true
 [/td]
@@ -117,6 +117,14 @@ Source code is available on GitHub at https://github.com/NBKRedSpy/QM_ExtraDeplo
 [/list]
 
 [h1]Change Log[/h1]
+
+[h2]1.6.0[/h2]
+[list]
+[*]Adds check for food.
+[list]
+[*]Thank you to SamuelDev for adding this feature
+[/list]
+[/list]
 
 [h2]1.5.5[/h2]
 [list]
