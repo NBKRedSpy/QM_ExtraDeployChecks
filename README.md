@@ -23,6 +23,7 @@ The configuration file will be created on the first game run and can be found at
 |Partially Loaded Weapons|Checks if a weapon is not fully loaded.  Ex:  12 out of 24 rounds|CheckPartiallyLoadedWeapons|true|
 |Armor Slot Empty|Checks if any armor slot is not filled.  Head, body, legs, feet|CheckArmorSlotNotFilled|true|
 |Weapon Slot Empty|Checks if any weapon slot is not filled.  Head, body, legs, feet|CheckWeaponSlotNotFilled|true|
+|Food in Inventory|Checks if there is food in the inventory|CheckFoodInInventory|true|
 
 # Rough Edges
 ## UI Overdraw
